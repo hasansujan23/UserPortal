@@ -13,7 +13,12 @@
 
 Route::get('/','PagesController@index');
 Route::get('/about','PagesController@about');
-Route::get('/register','UserController@index');
+Route::get('/login','PagesController@login')->name('login');
+Route::get('/register','PagesController@signup');
+Route::get('/logout','PagesController@logout')->name('logout');
+
+Route::get('/user','UserController@index')->name('userHome');
 
 
 Route::post('/create-user','UserController@create')->name('createUser');
+Route::post('/check-user','UserController@check')->name('checkUser');

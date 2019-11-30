@@ -7,8 +7,19 @@ use DB;
 
 class UserController extends Controller
 {
-    public function index(){
-    	return view('signup');
+    public function index(Request $request){
+    	if($request->session()->has('authenticateUser')){
+    		$categories=DB::table('categories')->get();
+    		$id=$request->session()->pull('authenticateUser');
+    		$posts=DB::table('posts')
+    				->where('user_id',$id)
+    				->get();
+    		return view('user.index',compact(["categories","posts"]));
+    	}
+    	else{
+    		return redirect()->route('login');
+    	}
+    	
     }
 
     public function create(Request $request){
@@ -33,6 +44,27 @@ class UserController extends Controller
     	}
     	else{
     		echo "Registration Failed";
+    	}
+    }
+
+    public function check(Request $request){
+    	$user=DB::table('users')
+    			->where('email',$request->email)
+    			->where('password',$request->password)
+    			->get();
+
+    	$row=$user->count();
+    	$id=0;
+    	if($row){
+    		foreach ($user as $val) {
+    			$id=$val->id;
+    		}
+    		$request->session()->put('authenticateUser',$id);
+    		return redirect()->route('userHome');
+    	}
+    	else{
+    		return redirect()->route('login')->with(['error'=>'Wrong user-id or password']);
+
     	}
     }
 }

@@ -91,7 +91,7 @@
 											<img class="img-fluid" src="img/l1.jpg" alt="">
 										</div>
 										<ul class="tags">
-											<li><a href="#">Lifestyle</a></li>
+											<li><a href="#">{{$post->category}}</a></li>
 										</ul>
 									</div>
 									<div class="col-lg-7 post-right">

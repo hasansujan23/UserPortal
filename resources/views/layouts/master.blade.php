@@ -26,6 +26,7 @@
 		<link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/main.css') }}">
+		@yield('header')
 	</head>
 	<body>
 
@@ -47,6 +48,7 @@
 		<script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
 		<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 		<script src="{{ asset('js/mail-script.js') }}"></script>
+		<script src="{{ asset('js/resume.min.js') }}"></script>
 		<script src="{{ asset('js/main.js') }}"></script>
 	</body>
 </html>
