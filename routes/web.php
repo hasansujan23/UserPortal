@@ -13,3 +13,7 @@
 
 Route::get('/','PagesController@index');
 Route::get('/about','PagesController@about');
+Route::get('/register','UserController@index');
+
+
+Route::post('/create-user','UserController@create')->name('createUser');

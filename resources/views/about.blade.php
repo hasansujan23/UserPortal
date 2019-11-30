@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@include('partials.header')
 @section('content')
 
 			<div class="site-main-container">
@@ -254,5 +254,5 @@
 			</div>
 		</section>
 		<!-- End brands Area -->
-
+@include('partials.footer')
 @endsection
