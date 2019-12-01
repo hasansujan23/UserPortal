@@ -41,11 +41,10 @@
 							<li class="menu-active"><a href="">Home</a></li>
 							<li class="menu-has-children"><a href="">Category</a>
 							<ul>
-								<li><a href="">Standard Post</a></li>
-								<li><a href="">Image Post</a></li>
-								<li><a href="">Gallery Post</a></li>
-								<li><a href="">Video Post</a></li>
-								<li><a href="">Audio Post</a></li>
+								@foreach ($categories as $category)
+									<li><a href="">{{$category->category}}</a></li>
+								@endforeach
+								
 							</ul>
 						</li>
 						<li><a href="">About</a></li>

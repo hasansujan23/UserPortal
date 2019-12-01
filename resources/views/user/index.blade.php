@@ -75,14 +75,15 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="col-md-8">
-            <form action="">
+            <form action="{{ route('createPost') }}" method="post" enctype="multipart/form-data">
+              {{csrf_field()}}
             	<div class="form-group">
             		<label for="">Title</label>
             		<input class="form-control" type="text" name="title" required>
             	</div>
             	<div class="form-group">
             		<label for="">Category</label>
-            		<select name="" id="" class="form-control">
+            		<select name="category" id="" class="form-control">
             			@foreach($categories as $category)
             				<option value="{{$category->id}}">{{$category->category}}</option>
             			@endforeach
@@ -90,11 +91,11 @@
             	</div>
             	<div class="form-group">
             		<label for="">Description</label>
-            		<textarea class="form-control" name="" id="" rows="10"></textarea>
+            		<textarea class="form-control" name="description" id="" rows="10"></textarea>
             	</div>
             	<div class="form-group">
             		<label for="">Image</label>
-            		<input class="form-control" type="file" name="title">
+            		<input class="form-control" type="file" name="image">
             	</div>
 
             	<input class="btn btn-success" type="submit" name="submit" value="Post">

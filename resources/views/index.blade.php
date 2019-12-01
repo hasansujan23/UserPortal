@@ -88,15 +88,15 @@
 									<div class="col-lg-5 post-left">
 										<div class="feature-img relative">
 											<div class="overlay overlay-bg"></div>
-											<img class="img-fluid" src="img/l1.jpg" alt="">
+											<img class="img-fluid" src="{{ asset('img/post-image') }}/{{$post->image}}" alt="">
 										</div>
 										<ul class="tags">
 											<li><a href="#">{{$post->category}}</a></li>
 										</ul>
 									</div>
-									<div class="col-lg-7 post-right">
-										<a href="image-post.html">
-											<h4>{{$post->title}}</h4>
+									<div class="col-lg-7">
+										<a href="{{URL::to('/read-post/'.$post->id)}}">
+											<h4 style="text-align: justify;padding-top: 15px;">{{$post->title}}</h4>
 										</a>
 										<ul class="meta">
 											<li><a href="#"><span class="lnr lnr-user"></span>{{$post->name}}</a></li>

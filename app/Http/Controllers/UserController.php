@@ -10,7 +10,7 @@ class UserController extends Controller
     public function index(Request $request){
     	if($request->session()->has('authenticateUser')){
     		$categories=DB::table('categories')->get();
-    		$id=$request->session()->pull('authenticateUser');
+    		$id=$request->session()->get('authenticateUser');
     		$posts=DB::table('posts')
     				->where('user_id',$id)
     				->get();

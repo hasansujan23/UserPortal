@@ -19,6 +19,9 @@ Route::get('/logout','PagesController@logout')->name('logout');
 
 Route::get('/user','UserController@index')->name('userHome');
 
+Route::get('/read-post/{id}','PostController@readPost');
 
 Route::post('/create-user','UserController@create')->name('createUser');
 Route::post('/check-user','UserController@check')->name('checkUser');
+
+Route::post('/create-post','PostController@create')->name('createPost');
