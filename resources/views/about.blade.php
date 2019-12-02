@@ -1,6 +1,7 @@
 @extends('layouts.master')
-@include('partials.header')
+
 @section('content')
+@include('partials.header')
 
 			<div class="site-main-container">
 			<!-- Start top-post Area -->

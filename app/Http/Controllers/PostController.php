@@ -37,10 +37,19 @@ class PostController extends Controller
     }
 
     public function readPost($id){
+    	$updatePost=DB::table('posts')
+    				->where('id',$id)
+    				->increment('views',1);
+
+
     	$post=DB::table('posts')
-    			->where('id',$id)
+    			->join('users','user_id','=','users.id')
+    			->join('categories','category_id','=','categories.id')
+    			->where('posts.id',$id)
+    			->select('posts.*','users.name','categories.category')
     			->get();
 
-    	return response()->json($post);
+    	return view('readpost',compact(["post"]));
+    	//return response()->json($post);
     }
 }
