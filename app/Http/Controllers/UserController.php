@@ -14,7 +14,10 @@ class UserController extends Controller
     		$posts=DB::table('posts')
     				->where('user_id',$id)
     				->get();
-    		return view('user.index',compact(["categories","posts"]));
+            $user=DB::table('users')
+                    ->where('id',$id)
+                    ->get();
+    		return view('user.index',compact(["categories","posts","user"]));
     	}
     	else{
     		return redirect()->route('login');
@@ -66,5 +69,35 @@ class UserController extends Controller
     		return redirect()->route('login')->with(['error'=>'Wrong user-id or password']);
 
     	}
+    }
+
+    public function update(Request $request){
+        if($request->session()->has('authenticateUser')){
+            $id=$request->session()->get('authenticateUser');
+            $data=array();
+            $data['name']=$request->name;
+            $data['country']=$request->country;
+            $data['phone']=$request->phone;
+            $data['description']=$request->description;
+
+            if($request->hasFile('image')){
+                $imageName=time().'.'.$request->image->getClientOriginalExtension();
+                $request->image->move(public_path('img/profile-picture/'),$imageName);
+                $data['image']=$imageName;
+            }
+
+            //return response()->json($data);
+            $updateUser=DB::table('users')
+                        ->where('id',$id)
+                        ->update($data);
+            if($updateUser){
+                return redirect()->route('userHome');
+            }
+
+
+        }
+        else{
+            return redirect()->route('login');
+        }
     }
 }

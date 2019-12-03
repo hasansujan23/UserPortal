@@ -50,5 +50,8 @@
 		<script src="{{ asset('js/mail-script.js') }}"></script>
 		<script src="{{ asset('js/resume.min.js') }}"></script>
 		<script src="{{ asset('js/main.js') }}"></script>
+
+		@yield('script')
+
 	</body>
 </html>

@@ -9,7 +9,9 @@
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
       <span class="d-block d-lg-none">Clarence Taylor</span>
       <span class="d-none d-lg-block">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ asset('img/about/user2.png') }}" alt="">
+        @foreach($user as $row)
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ asset('img/profile-picture') }}/{{$row->image}}" alt="">
+        @endforeach
       </span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,13 +45,15 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
       <div class="w-100">
-        <h1 class="mb-0">Clarence
-          <span class="text-primary">Taylor</span>
+        @foreach($user as $row)
+        <h1 class="mb-0">
+          <span class="text-primary">{{$row->name}}</span>
         </h1>
-        <div class="subheading mb-5">3542 Berry Street · Cheyenne Wells, CO 80810 · (317) 585-8468 ·
-          <a href="mailto:name@email.com">name@email.com</a>
+        <div class="subheading mb-5">{{$row->country}}
+          <a href="mailto:name@email.com">{{$row->email}}</a>
+        
         </div>
-        <p class="lead mb-5">I am experienced in leveraging agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</p>
+        <p class="lead mb-5">{{$row->description}}</p>
         <div class="social-icons">
           <a href="#">
             <i class="fa fa-linkedin"></i>
@@ -64,6 +68,7 @@
             <i class="fa fa-facebook-f"></i>
           </a>
         </div>
+        @endforeach
       </div>
     </section>
 
@@ -91,7 +96,7 @@
             	</div>
             	<div class="form-group">
             		<label for="">Description</label>
-            		<textarea class="form-control" name="description" id="" rows="10"></textarea>
+            		<textarea class="ckeditor form-control" name="description" id="" rows="10"></textarea>
             	</div>
             	<div class="form-group">
             		<label for="">Image</label>
@@ -111,10 +116,10 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="education">
       <div class="w-100">
-        <h2 class="mb-5">Education</h2>
+        <h2 class="mb-5">Your Posts</h2>
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <table class="table">
+          <table class="table" width="100">
           	<thead>
           		<tr>
           			<th>Title</th>
@@ -129,8 +134,8 @@
           				<td>{{$post->title}}</td>
           				<td>{{$post->posted_at}}</td>
           				<td>{{$post->views}}</td>
-          				<td>
-          					<a class="btn btn-primary" href="">View</a>
+          				<td style="width: 30%;">
+          					<a class="btn btn-primary" href="{{ route('readPost',['id'=>$post->id]) }}">View</a>
           					<a class="btn btn-warning" href="">Edit</a>
           					<a class="btn btn-danger" href="">Delete</a>
           				</td>
@@ -147,47 +152,37 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="skills">
       <div class="w-100">
-        <h2 class="mb-5">Skills</h2>
+        <h2 class="mb-5">Edit Profile</h2>
 
-        <div class="subheading mb-3">Programming Languages &amp; Tools</div>
-        <ul class="list-inline dev-icons">
-          <li class="list-inline-item">
-            <i class="fab fa-html5"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-css3-alt"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-js-square"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-angular"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-react"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-node-js"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-sass"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-less"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-wordpress"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-gulp"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-grunt"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class="fab fa-npm"></i>
-          </li>
-        </ul>
+        <div class="subheading col-md-8 mb-3">
+          @foreach($user as $val)
+          <form action="{{ route('updateUser') }}" method="post" enctype="multipart/form-data">
+            {{csrf_field()}}
+            <div class="form-group">
+              <label for="">Name</label>
+              <input class="form-control" type="text" name="name" value="{{$val->name}}">
+            </div>
+            <div class="form-group">
+              <label for="">Address</label>
+              <input class="form-control" type="text" name="country" value="{{$val->country}}">
+            </div>
+            <div class="form-group">
+              <label for="">Phone</label>
+              <input class="form-control" type="text" name="phone" value="{{$val->phone}}">
+            </div>
+            <div class="form-group">
+              <label for="">About Me</label>
+              <textarea class="ckeditor form-control" name="description" id="" rows="10">{{$val->description}}</textarea>
+            </div>
+            <div class="form-group">
+              <label for="">Profile Picture</label>
+              <input class="form-control" type="file" name="image">
+            </div>
+            <input class="btn btn-success" type="submit" name="submit" value="UPDATE">
+          </form>
+          @endforeach
+        </div>
+        
 
         <div class="subheading mb-3">Workflow</div>
         <ul class="fa-ul mb-0">
@@ -255,4 +250,7 @@
 
   </div>
 
+@endsection
+@section('script')
+  <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 @endsection
