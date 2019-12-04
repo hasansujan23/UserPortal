@@ -81,6 +81,20 @@ class UserController extends Controller
             $data['description']=$request->description;
 
             if($request->hasFile('image')){
+
+                $result=DB::table('users')
+                ->where('id',$id)
+                ->get();
+                $imgName="";
+                foreach ($result as $row) {
+                    $imgName=$row->image;
+                }
+
+                if(file_exists(public_path('img/profile-picture/'.$imgName))){
+                    unlink(public_path('img/profile-picture/'.$imgName));
+                }
+
+
                 $imageName=time().'.'.$request->image->getClientOriginalExtension();
                 $request->image->move(public_path('img/profile-picture/'),$imageName);
                 $data['image']=$imageName;

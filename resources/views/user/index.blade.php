@@ -96,7 +96,7 @@
             	</div>
             	<div class="form-group">
             		<label for="">Description</label>
-            		<textarea class="ckeditor form-control" name="description" id="" rows="10"></textarea>
+            		<textarea class="form-control" name="description" id="" rows="10"></textarea>
             	</div>
             	<div class="form-group">
             		<label for="">Image</label>
@@ -172,7 +172,7 @@
             </div>
             <div class="form-group">
               <label for="">About Me</label>
-              <textarea class="ckeditor form-control" name="description" id="" rows="10">{{$val->description}}</textarea>
+              <textarea class="form-control" name="description" id="" rows="10">{{$val->description}}</textarea>
             </div>
             <div class="form-group">
               <label for="">Profile Picture</label>
