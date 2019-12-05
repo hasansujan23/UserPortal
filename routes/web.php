@@ -20,6 +20,7 @@ Route::get('/logout','PagesController@logout')->name('logout');
 Route::get('/user','UserController@index')->name('userHome');
 
 Route::get('/read-post/{id}','PostController@readPost')->name('readPost');
+Route::get('/delete-post/{id}/{url}','PostController@deletePost')->name('deletePost');
 
 Route::post('/create-user','UserController@create')->name('createUser');
 Route::post('/update-user','UserController@update')->name('updateUser');

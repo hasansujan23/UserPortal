@@ -137,7 +137,7 @@
           				<td style="width: 30%;">
           					<a class="btn btn-primary" href="{{ route('readPost',['id'=>$post->id]) }}">View</a>
           					<a class="btn btn-warning" href="">Edit</a>
-          					<a class="btn btn-danger" href="">Delete</a>
+          					<a class="btn btn-danger" href="{{ route('deletePost',['id'=>$post->id,'url'=>$post->image]) }}">Delete</a>
           				</td>
           			</tr>
           		@endforeach
@@ -252,5 +252,5 @@
 
 @endsection
 @section('script')
-  <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+  
 @endsection

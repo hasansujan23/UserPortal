@@ -52,4 +52,19 @@ class PostController extends Controller
     	return view('readpost',compact(["post"]));
     	//return response()->json($post);
     }
+
+    public function deletePost(Request $request,$id,$url){
+    	if($request->session()->has('authenticateUser')){
+    		$delPost=DB::table('posts')
+    				->where('id',$id)
+    				->delete();
+    		if($delPost){
+    			if(file_exists(public_path('img/post-image/'.$url))){
+    				unlink(public_path('img/post-image/'.$url));
+    			}
+
+    			return redirect()->route('userHome');
+    		}
+    	}
+    }
 }
